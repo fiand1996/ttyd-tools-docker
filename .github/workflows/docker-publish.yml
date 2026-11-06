@@ -2,10 +2,10 @@ name: Build and Push to GHCR
 
 on:
   push:
-    branches: ["main", "master"]
+    branches: ["main"]
     tags: ["v*.*.*"]
   pull_request:
-    branches: ["main", "master"]
+    branches: ["main"]
 
 env:
   REGISTRY: ghcr.io
@@ -47,7 +47,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', github.default_branch) }}
+            type=raw,value=latest,enable={{is_default_branch}}
             type=sha,format=short
 
       # Step 6: Build and push the Docker image targeting linux/arm64 to match your binaries
