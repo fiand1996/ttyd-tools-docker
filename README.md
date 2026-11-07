@@ -36,7 +36,7 @@ docker run -d \
   -p 7681:7681 \
   --name web-terminal \
   --restart unless-stopped \
-  ghcr.io/fiand1996/ttyd-tools-docker:latest -port 7681 zsh
+  ghcr.io/fiand1996/ttyd-tools-docker:latest -W /bin/zsh
 
 ```
 
@@ -53,7 +53,7 @@ docker run -d \
   -v ~/.kube:/root/.kube:ro \
   --name web-terminal \
   --restart unless-stopped \
-  ghcr.io/fiand1996/ttyd-tools-docker:latest -port 7681 zsh
+  ghcr.io/fiand1996/ttyd-tools-docker:latest -W /bin/zsh
 
 ```
 
