@@ -1,10 +1,8 @@
 # ttyd-tools-docker
 
-# Custom ttyd Web Terminal
+A lightweight, feature-rich web-based terminal Docker image powered by [ttyd](https://github.com/tsl0922/ttyd). Pre-configured with essential networking tools, DevOps utilities, and a custom Zsh environment.
 
-A lightweight, feature-rich web-based terminal Docker image powered by [ttyd](https://github.com/tsl0922/ttyd). Pre-configured with essential networking, DevOps utilities, and a custom Zsh environment.
-
-> **Note:** This Dockerfile is currently set up for **ARM64 / aarch64** architecture (e.g., Apple Silicon, Raspberry Pi 4/5, or ARM-based Cloud VPS).
+> **Architecture Support:** Built with multi-arch support for **`linux/amd64`** (Intel/AMD) and **`linux/arm64`** (Apple Silicon, Raspberry Pi, Cloud ARM VPS).
 
 ---
 
@@ -20,10 +18,12 @@ A lightweight, feature-rich web-based terminal Docker image powered by [ttyd](ht
 
 ## 🚀 Getting Started
 
-### 1. Build the Docker Image
+### 1. Pull Image from GitHub Container Registry (GHCR)
+
+You can pull the pre-built multi-arch image directly:
 
 ```bash
-docker build -t custom-ttyd .
+docker pull ghcr.io/fiand1996/ttyd-tools-docker:latest
 
 ```
 
@@ -36,7 +36,7 @@ docker run -d \
   -p 7681:7681 \
   --name web-terminal \
   --restart unless-stopped \
-  custom-ttyd -port 7681 zsh
+  ghcr.io/fiand1996/ttyd-tools-docker:latest -port 7681 zsh
 
 ```
 
@@ -52,18 +52,21 @@ docker run -d \
   -v ~/.ssh:/root/.ssh:ro \
   -v ~/.kube:/root/.kube:ro \
   --name web-terminal \
-  custom-ttyd -port 7681 zsh
+  --restart unless-stopped \
+  ghcr.io/fiand1996/ttyd-tools-docker:latest -port 7681 zsh
 
 ```
 
 ---
 
-## 🏗️ Architecture Support
+## 🛠️ Building Locally
 
-If you need to run this on an **x86_64 / amd64** machine, update the following lines in the `Dockerfile`:
+If you prefer to build the Docker image locally on your machine:
 
-- Change `fastfetch-linux-aarch64.deb` to `fastfetch-linux-amd64.deb`
-- Change `bin/linux/arm64/kubectl` to `bin/linux/amd64/kubectl`
+```bash
+docker build -t ttyd-tools-docker .
+
+```
 
 ---
 
